@@ -1,0 +1,61 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Send_an_email_(V2)_2": {
+                "inputs": {
+                    "body": {
+                        "Body": "<p>@{triggerBody()?['body']}</p>",
+                        "Importance": "Normal",
+                        "Subject": "test",
+                        "To": "shadab0799@gmail.com"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['office365']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/v2/Mail"
+                },
+                "runAfter": {},
+                "type": "ApiConnection"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "defaultValue": {},
+                "type": "Object"
+            }
+        },
+        "triggers": {
+            "manual": {
+                "inputs": {
+                    "schema": {
+                        "properties": {
+                            "body": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "value": {
+                "office365": {
+                    "connectionId": "/subscriptions/24fa5a83-7894-4db4-8c5e-6b18d579afa8/resourceGroups/SagarGaire/providers/Microsoft.Web/connections/office365-1",
+                    "connectionName": "office365-1",
+                    "id": "/subscriptions/24fa5a83-7894-4db4-8c5e-6b18d579afa8/providers/Microsoft.Web/locations/eastus/managedApis/office365"
+                }
+            }
+        }
+    }
+}
